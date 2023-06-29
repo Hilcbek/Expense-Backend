@@ -11,7 +11,7 @@ let app = express()
 app.use(morgan('common'))
 app.use(cookieParser())
 app.use(express.json())
-app.use(cors({origin: 'http://localhost:5173', credentials : true}));
+app.use(cors({origin: ['http://localhost:5173','https://expense-tracker-mern-app.netlify.app'], credentials : true}));
 let PORT = process.env.PORT || 6000
 let MONGOOSE_URL = process.env.MONGOOSE_URL
 mongoose.connect(MONGOOSE_URL).then((connection) => app.listen(PORT, () => console.log('Connected to mongodb'))).catch((err) => console.error(err));
