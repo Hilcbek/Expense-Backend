@@ -35,7 +35,7 @@ export let Login = async (req,res,next) => {
             username : Info.username,
             isAdmin : Info.isAdmin
         },process.env.JWT,{expiresIn : '1d'});
-        res.cookie('token',token,{sameSite : true, HttpOnly : true }).status(200).json(Info);
+        res.cookie('token',token,{ HttpOnly : true },{sameSite : true}).status(200).json(Info);
     } catch (error) {
         next(error)
     }
