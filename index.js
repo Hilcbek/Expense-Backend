@@ -24,3 +24,4 @@ app.use((err,req,res,next) => {
     let errStatus = err.status;
     res.status(errStatus).json(errMessage);
 })
+//http://localhost:5173
