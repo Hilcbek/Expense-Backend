@@ -34,7 +34,7 @@ export let Login = async (req,res,next) => {
         let token = jwt.sign({
             username : Info.username,
             isAdmin : Info.isAdmin
-        },process.env.JWT,{expiresIn : '1d'});
+        },process.env.JWT,{expiresIn : '2h'});
         res.cookie('token',token,{ secure : true }).status(200).json(Info);
     } catch (error) {
         next(error)
