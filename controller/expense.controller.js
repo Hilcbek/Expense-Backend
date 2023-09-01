@@ -1,6 +1,7 @@
 import { ErrorInfo } from '../Errors/Error.js';
 import Expense from '../model/Expense.model.js'
-export let AddExpense = async (req,res,next) => {
+import asyncHandler from 'express-async-handler'
+export let AddExpense = asyncHandler(async (req,res,next) => {
     try {
         let {Expensetext,Amount} = req.body;
         if(!Expensetext || !Amount) return next((ErrorInfo(400,'please provide an input')))
@@ -12,8 +13,8 @@ export let AddExpense = async (req,res,next) => {
     } catch (error) {
         next(error)
     }
-}
-export let GetAllExpense = async (req,res,next) => {
+})
+export let GetAllExpense = asyncHandler(async (req,res,next) => {
     try {
         let NegativeTotal,PositiveTotal,TotalSum,Validator;
         let All_Expenses = await Expense.find({username : req.user.username}).sort({ createdAt : -1 })
@@ -34,16 +35,16 @@ export let GetAllExpense = async (req,res,next) => {
     } catch (error) {
         next(error)
     }
-}
-export let SingleExpense = async (req,res,next) => {
+})
+export let SingleExpense = asyncHandler(async (req,res,next) => {
     try {
         let SingleExpenseInfo = await Expense.findById(req.params.id)
         res.status(200).json(SingleExpenseInfo);
     } catch (error) {
         next(error)
     }
-}
-export let EditExpense = async (req,res,next) => {
+})
+export let EditExpense = asyncHandler(async (req,res,next) => {
     try {
         let id = req.params.id;
         let {Expensetext,Amount} = req.body;
@@ -58,8 +59,8 @@ export let EditExpense = async (req,res,next) => {
     } catch (error) {
         next(error)
     }
-}
-export let DeleteExpense = async (req,res,next) => {
+})
+export let DeleteExpense = asyncHandler(async (req,res,next) => {
     try {
         let id = req.params.id;
         await Expense.findByIdAndDelete(id);
@@ -68,3 +69,4 @@ export let DeleteExpense = async (req,res,next) => {
         next(error)
     }
 }
+)
